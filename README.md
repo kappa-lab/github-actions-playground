@@ -1,0 +1,1 @@
+[![Go](https://github.com/kappa-lab/github-actions-playground/actions/workflows/go.yml/badge.svg)](https://github.com/kappa-lab/github-actions-playground/actions/workflows/go.yml)
