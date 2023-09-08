@@ -23,14 +23,13 @@ func Test_getWorld(t *testing.T) {
 			t.Errorf("Expect NoError, got Error: %v", err)
 		}
 
-		if string(msg) == "world is mine" {
-			t.Errorf("Expect world is mine, got : %v", res.StatusCode)
+		if string(msg) != "world is mine" {
+			t.Errorf("Expect world is mine, got : %v", msg)
 		}
 	})
 
 	t.Run("ng", func(t *testing.T) {
 		res, err := cli.Get("http://localhost:8088/404")
-		t.Log(res)
 		if err != nil {
 			t.Errorf("Expect NoError, got Error: %v", err)
 		}

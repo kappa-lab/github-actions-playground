@@ -22,16 +22,19 @@ jobs:
         go-version: '1.20'
 
     - name: Build
-      run: go build -v -o=app ./cmd
+      run: |
+        go build -v -o=app ./cmd
+        ls -al
     
+    - name: Test
+      run: go test -v ./cmd
+
     - name: Upload build binary
       uses: actions/upload-artifact@v3
       with:
         name: app-binary
         path: ./app
 
-    - name: Test
-      run: go test -v ./cmd
   e2e:
     needs: build
     runs-on: ubuntu-latest
@@ -42,10 +45,11 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: app-binary
-        path: ./app
 
     - name: Run server
-      run:  make run-binary 
+      run: |
+        chmod +x ./app
+        ./app &
 
     - name: E2E Test
       run: go test -v ./e2e
