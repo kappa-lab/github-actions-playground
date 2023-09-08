@@ -26,3 +26,14 @@ jobs:
 
     - name: Test
       run: go test -v ./cmd
+  e2e:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Run server
+      run:  make run-binary 
+
+    - name: E2E Test
+      run: go test -v ./e2e
