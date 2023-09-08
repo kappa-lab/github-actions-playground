@@ -16,4 +16,8 @@ dk-build:
 dk-run:
 	docker run --publish=8088:8088 --name=docker-go-app docker-go-app 
 
+dkc-run:
+	docker-compose up -d
+
+
 PHONY: build run	
