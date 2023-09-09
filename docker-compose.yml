@@ -7,3 +7,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8088:8088
+  db:
+    image: mysql:latest
+    volumes:
+      - ./docker-entrypoint-initdb:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
