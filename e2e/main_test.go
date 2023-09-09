@@ -28,7 +28,7 @@ func Test_getWorld(t *testing.T) {
 		}
 	})
 
-	t.Run("ng", func(t *testing.T) {
+	t.Run("404", func(t *testing.T) {
 		res, err := cli.Get("http://localhost:8088/404")
 		if err != nil {
 			t.Errorf("Expect NoError, got Error: %v", err)
@@ -37,4 +37,27 @@ func Test_getWorld(t *testing.T) {
 			t.Errorf("Expect 404, got : %v", res.StatusCode)
 		}
 	})
+
+	t.Run("items", func(t *testing.T) {
+		res, err := cli.Get("http://localhost:8088/items")
+		if err != nil {
+			t.Errorf("Expect NoError, got Error: %v", err)
+		}
+		if err != nil {
+			t.Errorf("Expect NoError, got Error: %v", err)
+		}
+		if res.StatusCode != 200 {
+			t.Errorf("Expect 200, got : %v", res.StatusCode)
+		}
+
+		msg, err := io.ReadAll(res.Body)
+		if err != nil {
+			t.Errorf("Expect NoError, got Error: %v", err)
+		}
+
+		if string(msg) != "[{'id':'1', 'name':'Coffee'} {'id':'2', 'name':'Tea'}]" {
+			t.Errorf("Expect [{'id':'1', 'name':'Coffee'} {'id':'2', 'name':'Tea'}], got : %v", string(msg))
+		}
+	})
+
 }
