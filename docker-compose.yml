@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  app:
+    image: golang:1.20-alpine
+    # buildせずに動かす
+    command: go run ./cmd
+    # buildして動かす
+    # command: |
+    #   go build -o=app ./cmd
+    #   ./app
+    tty: true # コンテナの永続化
+    working_dir: /go/src/github.com/kappa-lab/github-actions-playground/
+    volumes: 
+      - ./:/go/src/github.com/kappa-lab/github-actions-playground/
+    ports:
+      - 8088:8088
